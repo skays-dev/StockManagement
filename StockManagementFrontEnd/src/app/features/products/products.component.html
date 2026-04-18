@@ -1,0 +1,101 @@
+<div class="grid grid-2">
+  <section class="card">
+    <h1 class="page-title">Produits</h1>
+    <p class="page-subtitle">Manage items in stock.</p>
+
+    <form class="form-grid" [formGroup]="form" (ngSubmit)="submit()">
+      <div class="grid grid-2">
+        <label>
+          Nom
+          <input type="text" formControlName="name" />
+        </label>
+
+        <label>
+          SKU
+          <input type="text" formControlName="sku" />
+        </label>
+      </div>
+
+      <div class="grid grid-2">
+        <label>
+          Quantité
+          <input type="number" formControlName="quantity" />
+        </label>
+
+        <label>
+          Prix unitaire
+          <input type="number" formControlName="unitPrice" />
+        </label>
+      </div>
+
+      <div class="grid grid-2">
+        <label>
+          Stock minimum
+          <input type="number" formControlName="minimumStock" />
+        </label>
+
+        <label>
+          Catégorie
+          <select formControlName="categoryId">
+            <option [ngValue]="0">Sélectionner</option>
+            <option *ngFor="let category of categories" [ngValue]="category.id">
+              {{ category.name }}
+            </option>
+          </select>
+        </label>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn-primary" type="submit">
+          {{ editingId ? 'Mettre à jour' : 'Créer' }}
+        </button>
+        <button class="btn-secondary" type="button" (click)="cancelEdit()">Annuler</button>
+      </div>
+    </form>
+
+    <p class="message success" *ngIf="successMessage">{{ successMessage }}</p>
+    <p class="message error" *ngIf="errorMessage">{{ errorMessage }}</p>
+  </section>
+
+  <section class="card">
+    <h2>Liste des produits</h2>
+
+    <table class="table" *ngIf="products.length > 0; else emptyProducts">
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>SKU</th>
+          <th>Qté</th>
+          <th>Prix</th>
+          <th>Catégorie</th>
+          <th>État</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products">
+          <td>{{ product.name }}</td>
+          <td>{{ product.sku }}</td>
+          <td>{{ product.quantity }}</td>
+          <td>{{ product.unitPrice | number:'1.2-2' }}</td>
+          <td>{{ product.categoryName || '-' }}</td>
+          <td>
+            <span class="badge" [class.low]="product.isLowStock" [class.ok]="!product.isLowStock">
+              {{ product.isLowStock ? 'Stock faible' : 'OK' }}
+            </span>
+          </td>
+          <td>
+            <div class="btn-row">
+              <button class="btn-secondary" type="button" (click)="edit(product)">Modifier</button>
+              <button class="btn-danger" type="button" (click)="delete(product.id)">Supprimer</button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <ng-template #emptyProducts>
+      <p class="helper">No products yet.</p>
+    </ng-template>
+  </section>
+</div>

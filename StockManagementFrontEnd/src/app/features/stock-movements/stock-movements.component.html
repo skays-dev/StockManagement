@@ -1,0 +1,74 @@
+<div class="grid grid-2">
+  <section class="card">
+    <h1 class="page-title">Mouvements de stock</h1>
+    <p class="page-subtitle">Add IN or OUT stock movements.</p>
+
+    <form class="form-grid" [formGroup]="form" (ngSubmit)="submit()">
+      <label>
+        Produit
+        <select formControlName="productId">
+          <option [ngValue]="0">Sélectionner</option>
+          <option *ngFor="let product of products" [ngValue]="product.id">
+            {{ product.name }} ({{ product.quantity }})
+          </option>
+        </select>
+      </label>
+
+      <div class="grid grid-2">
+        <label>
+          Type
+          <select formControlName="type">
+            <option value="IN">Entrée</option>
+            <option value="OUT">Sortie</option>
+          </select>
+        </label>
+
+        <label>
+          Quantité
+          <input type="number" formControlName="quantity" />
+        </label>
+      </div>
+
+      <label>
+        Note
+        <textarea rows="4" formControlName="note"></textarea>
+      </label>
+
+      <div class="btn-row">
+        <button class="btn-primary" type="submit">Enregistrer</button>
+      </div>
+    </form>
+
+    <p class="message success" *ngIf="successMessage">{{ successMessage }}</p>
+    <p class="message error" *ngIf="errorMessage">{{ errorMessage }}</p>
+  </section>
+
+  <section class="card">
+    <h2>Historique</h2>
+
+    <table class="table" *ngIf="movements.length > 0; else emptyMovements">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Produit</th>
+          <th>Type</th>
+          <th>Qté</th>
+          <th>Note</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let movement of movements">
+          <td>{{ movement.createdAt | date:'short' }}</td>
+          <td>{{ movement.productName || '-' }}</td>
+          <td>{{ movement.type }}</td>
+          <td>{{ movement.quantity }}</td>
+          <td>{{ movement.note || '-' }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <ng-template #emptyMovements>
+      <p class="helper">No stock movements yet.</p>
+    </ng-template>
+  </section>
+</div>

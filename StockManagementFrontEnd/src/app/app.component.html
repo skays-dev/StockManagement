@@ -1,0 +1,16 @@
+<header class="navbar">
+  <div class="navbar-inner">
+    <a class="brand" routerLink="/">Gestionnaire de stock</a>
+
+    <nav class="nav-links">
+      <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Dashboard</a>
+      <a class="nav-link" routerLink="/categories" routerLinkActive="active">Catégories</a>
+      <a class="nav-link" routerLink="/products" routerLinkActive="active">Produits</a>
+      <a class="nav-link" routerLink="/stock-movements" routerLinkActive="active">Mouvements</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <router-outlet></router-outlet>
+</main>

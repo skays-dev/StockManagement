@@ -1,0 +1,60 @@
+<div class="grid grid-2">
+  <section class="card">
+    <h1 class="page-title">Catégories</h1>
+    <p class="page-subtitle">Create and manage product categories.</p>
+
+    <form class="form-grid" [formGroup]="form" (ngSubmit)="submit()">
+      <label>
+        Nom
+        <input type="text" formControlName="name" />
+      </label>
+
+      <label>
+        Description
+        <textarea rows="4" formControlName="description"></textarea>
+      </label>
+
+      <div class="btn-row">
+        <button class="btn-primary" type="submit">
+          {{ editingId ? 'Mettre à jour' : 'Créer' }}
+        </button>
+        <button class="btn-secondary" type="button" (click)="cancelEdit()">Annuler</button>
+      </div>
+    </form>
+
+    <p class="message success" *ngIf="successMessage">{{ successMessage }}</p>
+    <p class="message error" *ngIf="errorMessage">{{ errorMessage }}</p>
+  </section>
+
+  <section class="card">
+    <h2>Liste des catégories</h2>
+
+    <table class="table" *ngIf="categories.length > 0; else emptyCategories">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nom</th>
+          <th>Description</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let category of categories">
+          <td>{{ category.id }}</td>
+          <td>{{ category.name }}</td>
+          <td>{{ category.description || '-' }}</td>
+          <td>
+            <div class="btn-row">
+              <button class="btn-secondary" type="button" (click)="edit(category)">Modifier</button>
+              <button class="btn-danger" type="button" (click)="delete(category.id)">Supprimer</button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <ng-template #emptyCategories>
+      <p class="helper">No categories yet.</p>
+    </ng-template>
+  </section>
+</div>

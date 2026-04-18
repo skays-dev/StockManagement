@@ -1,0 +1,27 @@
+<h1 class="page-title">Dashboard</h1>
+<p class="page-subtitle">Overview of your inventory.</p>
+
+<div class="stats" *ngIf="summary">
+  <div class="stat-box">
+    <h3>Catégories</h3>
+    <strong>{{ summary.totalCategories }}</strong>
+  </div>
+  <div class="stat-box">
+    <h3>Produits</h3>
+    <strong>{{ summary.totalProducts }}</strong>
+  </div>
+  <div class="stat-box">
+    <h3>Quantité totale</h3>
+    <strong>{{ summary.totalQuantity }}</strong>
+  </div>
+  <div class="stat-box">
+    <h3>Stock faible</h3>
+    <strong>{{ summary.lowStockProducts }}</strong>
+  </div>
+  <div class="stat-box">
+    <h3>Valeur stock</h3>
+    <strong>{{ summary.totalStockValue | number:'1.2-2' }}</strong>
+  </div>
+</div>
+
+<p class="message error" *ngIf="errorMessage">{{ errorMessage }}</p>
