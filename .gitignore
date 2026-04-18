@@ -1,0 +1,75 @@
+# =========================
+# General
+# =========================
+.env
+.DS_Store
+Thumbs.db
+*.log
+*.swp
+
+# =========================
+# .NET / Visual Studio
+# =========================
+.vs/
+bin/
+obj/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Rider / IntelliJ
+.idea/
+*.sln.iml
+
+# VS Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Test / coverage
+TestResults/
+coverage*.json
+coverage*.xml
+*.coverage
+*.coveragexml
+
+# NuGet
+*.nupkg
+*.snupkg
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
+
+# Publish / build artifacts
+publish/
+artifacts/
+
+# =========================
+# Angular / Node
+# =========================
+node_modules/
+dist/
+tmp/
+out-tsc/
+.angular/cache/
+coverage/
+.bazel-out/
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# =========================
+# Optional project files
+# =========================
+.history/
+.sass-cache/
