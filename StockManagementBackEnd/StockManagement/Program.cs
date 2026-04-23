@@ -43,7 +43,7 @@ app.UseSwaggerUI();
 app.UseCors("AllowAll");
 
 app.UseAuthentication();
-app.UseAuthorization();
+app.UseAuthorization(); 
 
 app.MapControllers();
 
